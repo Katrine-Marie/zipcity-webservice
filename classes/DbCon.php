@@ -32,6 +32,9 @@ class DbCon{
     public function query($sql){
         return $this->ObjConnection->query($sql);
     }
+    
+
+    /* ========== METHODS TO FETCH ZIPCITY DATA ========== */
 
     public function getCityByZipCode($zipCode){
         $sql = 'SELECT * FROM zipcity WHERE zipcode = ' . $zipCode . '';
