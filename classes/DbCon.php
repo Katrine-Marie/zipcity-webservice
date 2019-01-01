@@ -1,5 +1,6 @@
 <?php
 require_once 'Config.php';
+require_once 'City.php';
 
 class DbCon{
 
@@ -32,18 +33,9 @@ class DbCon{
     public function query($sql){
         return $this->ObjConnection->query($sql);
     }
-    
+
 
     /* ========== METHODS TO FETCH ZIPCITY DATA ========== */
-
-    public function getCityByZipCode($zipCode){
-        $sql = 'SELECT * FROM zipcity WHERE zipcode = ' . $zipCode . '';
-        $result = $this->query($sql);
-
-        while($row = $result->fetch_object()){
-            return new City($row->zipcode, $row->cityname);
-        }
-    }
 
     public function getAllCities(){
         $sql = 'SELECT * FROM zipcity';
@@ -56,4 +48,22 @@ class DbCon{
         }
 
       return $cities;
+    }
+
+    public function getCityByZipCode($zipCode){
+        $sql = 'SELECT * FROM zipcity WHERE zipcode = ' . $zipCode . '';
+        $result = $this->query($sql);
+
+        while($row = $result->fetch_object()){
+            return new City($row->zipcode, $row->cityname);
+        }
+    }
+
+    public function getZipCodeByCity($city){
+        $sql = 'SELECT * FROM zipcity WHERE cityname = ' . $city . '';
+        $result = $this->query($sql);
+
+        while($row = $result->fetch_object()){
+            return new City($row->zipcode, $row->cityname);
+        }
     }
